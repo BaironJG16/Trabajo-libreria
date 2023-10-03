@@ -1,0 +1,580 @@
+-- database: c:\Clases Ruby\Memo8A\Memo.sqlite3
+
+-- Use the ▷ button in the top right corner to run the entire file.
+
+-- *****************************************************1- USUARIOS*********************************************
+CREATE TABLE
+    User (
+        ID_User INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        NAME VARCHAR(30),
+        EMAIL VARCHAR(40),
+        PASSWORD VARHCAR (25),
+        ID_User_type INTEGER NOT NULL,
+        STATE VARCHAR(50),
+        FOREIGN KEY (ID_User_Type) REFERENCES User_Type (ID_User_Type)
+    );
+
+INSERT INTO User (NAME,EMAIL,PASSWORD,ID_User_Type,STATE) VALUES
+    ('Bairon Juárez', 'Baironjuarez1603@gmail.com', 88776655, 1, 'Active' ),
+    ('Thibaut Courtois', 'ThibautCour1@gmail.com', 21234321, 2, 'Inactivo'),
+    ('David Alaba', 'Davidala4@hotmail.com', 87654321, 2, 'Active'),
+    ('Jude Bellingham', 'JudeBelli55@gmail.com', 55555555, 1, 'Active'),
+    ('Vinicius Junior', 'ViniJR77@gmail.com', 99075145, 1, 'Active'),
+    ('Javier García', 'Jagarcía34@gmail.com', 12345678, 2, 'Inactivo'),
+    ('María Carmen González', 'MaCargonzalez11@gmail.com', 98765432, 2, 'Active'),
+    ('María Rodríguez', 'MariaRodri12@gmail.com', 43234324, 2, 'Active'),
+    ('Antonio Fernández', 'Tonifer23@gmail.com', 90860952, 2, 'Active'),
+    ('Ana López', 'Anapez34@gmail.com', 28303928, 2, 'Active'),
+    ('Rafael Martínez', 'Rafamar45@hotmail.com', 94620362, 2, 'Inactivo'),
+    ('Cristina Sánchez', 'Crisan56@hotmail.com', 20548342, 2, 'Active'),
+    ('Ángeles Pérez', 'angelesperez67@hotmail.com', 62026492, 2, 'Active'),
+    ('Pedro Gómez', 'Pedritoclavito78@hotmail.com', 18460341, 2, 'Active'),
+    ('Lucía Martin', 'lucitin89@hotmail.com', 20986362, 2, 'Inactivo'),
+    ('Francisca Jiménez', 'ciscajimez90@hotmail.com', 32451290, 2, 'Active'),
+    ('Fernando Ruiz', 'nandoruiz01@hotmail.com', 90759081, 2, 'Active'),
+    ('Antonia Hernández', 'antonianandez12@gmail.com', 12121232, 2, 'Inactivo'),
+    ('Sara Diaz', 'saradiaz23@gmail.com', 43568016, 2, 'Active'),
+    ('Elena Moreno', 'elenitamoreno34@hotmail.com', 23153820, 2, 'Active');
+
+
+INSERT INTO User (NAME,EMAIL,PASSWORD,ID_User_Type,STATE) VALUES
+    ('Andrey Guillén', 'AndreyGuillen0316@gmail.com', 12345678, 1, 'Active' );
+
+
+DROP TABLE User;
+-- *****************************************************1- USUARIOS*********************************************
+
+-- *****************************************************2- TIPOS USUARIOS***************************************
+CREATE TABLE
+    User_Type (
+        ID_User_Type INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        Description VARCHAR,
+        State VARCHAR
+    );
+
+INSERT INTO User_Type(
+    description, State) VALUES ("Administrator", "Active"),
+    ("Client", "Active");
+
+DROP TABLE User_Type;
+-- *****************************************************2- TIPOS USUARIOS***********************************
+
+-- *****************************************************3- METODOS PAGO*************************************
+CREATE TABLE 
+    Payment_Method (
+        ID_Payment_Method INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ID_User INTEGER NOT NULL,
+        Description VARCHAR,
+        State VARCHAR,
+        FOREIGN KEY (ID_User) REFERENCES User (ID_User)
+    );
+
+INSERT INTO Payment_Method (ID_User, Description, State) VALUES
+    (1, 'Cash', 'Active'),
+    (16,'Bank Transfer', 'Active'),
+    (9,'Sinpe', 'Active'),
+    (19,'Cash', 'Active');
+
+DROP TABLE Payment_Method;
+-- *****************************************************3- METODOS PAGO*************************************
+
+-- *****************************************************4- TIEMPO DE ALQUILER*******************************
+CREATE TABLE 
+    Rental_Time (
+        ID_Rental_Time INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        Description VARCHAR,
+        State VARCHAR
+    );
+
+    INSERT INTO Rental_Time (Description,State) VALUES 
+    ("1 dia", "active"),
+    ("1 semana", "active"),
+    ("1 mes", "active"),
+    ("3 meses", "active"),
+    ("6 meses", "active");
+
+DROP TABLE Rental_Time;
+-- *****************************************************4- TIEMPO DE ALQUILER*******************************
+
+-- *****************************************************5- LIBROS*******************************************
+CREATE TABLE
+    Book (
+        ID_Book INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        Name VARCHAR(30),
+        Genre VARCHAR(25),
+        Description VARCHAR,
+        ISBN INTEGER NOT NULL,
+        Publication_Year INTEGER NOT NULL,
+        State VARCHAR(35)
+    );
+DROP TABLE Book;
+
+INSERT INTO Book (Name,Genre,Description,ISBN,Publication_Year,State) VALUES 
+    ('Padre rico, Padre pobre','Economía','Robert T. Kiyosaki que enseña a las personas a hacerse millonarias',9788466373005, 2023, 'Active'),
+    ('La carrera de los 3 cerditos','Infantil','Una emocionante carrera entre amigos',9788408267768, 2023, 'Active'),
+    ('Amor en Juego','Novela romántica y erótica','A VECES TU LUGAR EN EL MUNDO NO ES UN "DÓNDE" SINO UN "QUIÉN".',9788425365690, 2023, 'Active'),
+    ('Codigo Penal','Derecho penal','los materiales que le permiten solventar problemas de aplicación temporal de los delitos',9788430988419, 2023, 'Active'),
+    ('La revelion de los buenos','Novela negro','PARA EL QUE EL MAL TRIUNFE SOLO ES NECESARIO QUE LOS BUENOS NO HAGAN NADA.',9788408275787, 2023, 'Inactive'),
+    ('CÓMO HACER QUE TE PASEN COSAS BUENAS','Autoayuda','ENTIENDE TU CEREBRO, GESTIONA TUS EMOCIONES, MEJORA TU VIDA',9788467053302, 2018, 'Active'),
+    ('LA SOMBRA DE LA ROSA','Novela negra','Un asesino en serie obsesionado con los crímenes de la literatura.',9788491298007, 2023, 'Inactive'),
+    ('UN CUERPO 10 EN 1 MINUTO','Deporte','CÓMO RECUPERAR TU FIGURA CON ESTIRAMIENTOS SENCILLOS DE 1 MINUTO AL DÍA',9788418524639, 2023, 'Active'),
+    ('EL CUCO DE CRISTAL','Novela negra','¿ESTÁS PREPARADO PARA ARRIESGAR TU CORAZÓN? ',9788491293552, 2023, 'Inactive'),
+    ('INVISIBLE','Juvenil','Emotiva, conmovedora, diferente...Invisible narra, a través de  los ojos de un niño, una historia que podría ser la de cualquiera de nosotros.',9788416588435, 2018, 'Inactive'),
+    ('EL BOMBERO DE LOS DEDOS DE FUEGO 1','Hentai','Soma,mi amigo de la infancia, es un bombero ligón que disfruta a tope de la fiesta.',9788419625045, 2023, 'Active'),
+    ('EL BOMBERO DE LOS DEDOS DE FUEGO 2','Hentai','Ryo ya ha empezado a ser consciente de sus sentimientos, ¡pero ahora aparece en escena Miu, una antigua compañera de Soma con la que se lleva genial! ',9788419625076, 2023, 'Inactive'),
+    ('EL BOMBERO DE LOS DEDOS DE FUEGO 3','Hentai','Después de ser sinceros el uno con el otro, Ryo y Soma son, por fin, pareja. Sin embargo, ser novia de un bombero no es moco de pavo',9788419625083, 2023, 'Inactive'),
+    ('LA CHICA DEL VERANO','Novela','Así quería ser yo: anónima. Oculta, pero presente.',9788448038977, 2023, 'Active'),
+    ('LOS INOCENTES','Novela negra','Faltan dos semanas para la boda de la teniente Valentina Redondo y Oliver Gordon.',9788423363841, 2023, 'Active'),
+    ('LÍBRATE DEL MIEDO','Psicología','ESTRATEGIAS PARA AFRONTAR TUS TEMORES CON INTELIGENCIA EMOCIONAL',9788425365270, 2023, 'Inactive'),
+    ('CÓMO SER UN ESTOICO','Filosofía','UTILIZAR LA FILOSOFÍA ANTIGUA PARA VIVIR UNA VIDA MODERNA',9788408242604, 2021, 'Active'),
+    ('DIOS SALVE A PEP','Deportes','RETRATO DE UNA CORONACIÓN',9788412637755, 2023, 'Active'),
+    ('DE PELOTAZO EN PELOTAZO', 'Deportes', 'ESPECULACIÓN, DESPILFARRO Y PORMISHUEVISMO EN EL FÚTBOL ESPAÑOL', 9788419441218, 2023, 'Active'),
+    ('EL MURO. LA HISTORIA DE MI VIDA', 'Deportes', 'La esperada autobiografía del mejor portero del mundo.', 9788412288537, 2023, 'Inactive');
+-- *****************************************************5- LIBROS*******************************************
+
+-- *****************************************************6- CARRITO******************************************
+CREATE TABLE
+    Shopping (
+        ID_Shopping INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ID_User INTEGER NOT NULL,
+        ID_Rental_Time INTEGER NOT NULL,
+        Payment_Amount INTEGER NOT NULL,
+        Loan_Date DATE DEFAULT CURRENT_DATE,
+        Return_Date DATE NOT NULL,
+        Late_Amount INTEGER NOT NULL,
+        Transaction_Number INTEGER NOT NULL,
+        Total_Amount INTEGER NOT NULL,
+        State VARCHAR,
+        FOREIGN KEY (ID_User) REFERENCES User (ID_User),
+        FOREIGN KEY (ID_Rental_Time) REFERENCES Rental_Time (ID_Rental_Time)
+    );
+
+INSERT INTO Shopping (ID_User, ID_Rental_Time, Payment_Amount, Return_Date, Late_Amount, Transaction_Number, Total_Amount, State) VALUES
+    (1, 2, 10000, DATE('NOW', '+7 DAYS'), 0, 85461, 10000, 'BORROWED'),
+    (6, 3, 5000, DATE('NOW', '+30 DAYS'), 0, 1253, 5000, 'BORROWED'),
+    (9, 4, 2500, DATE('NOW', '+90 DAYS'), 0, 9642, 2500, 'BORROWED'),
+    (16, 1, 8599, DATE('NOW', '+1 DAY'), 0, 1001, 8599, 'BORROWED');
+
+INSERT INTO Shopping (ID_User, ID_Rental_Time, Payment_Amount, Return_Date, Late_Amount, Transaction_Number, Total_Amount, State) VALUES
+    (1, 1, 100, DATE('NOW', '+1 DAY'), 0, 1111, 150, 'BORROWED');
+
+drop table Shopping;
+-- *****************************************************6- CARRITO******************************************
+
+-- *****************************************************7- LIBROS EN EL CARRITO*****************************
+CREATE TABLE
+    Book_Shopping (
+        ID_Book_Shopping INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ID_Book INTEGER NOT NULL,
+        ID_Shopping INTEGER NOT NULL,
+        FOREIGN KEY (ID_Book) REFERENCES Book (ID_Book),
+        FOREIGN KEY (ID_Shopping) REFERENCES Shopping (ID_Shopping)
+    );
+
+INSERT INTO Book_Shopping(ID_Book,ID_Shopping) VALUES
+    (20, 1),
+    (19, 2),
+    (18,3),
+    (17, 4),
+    (16, 5),
+    (15, 6),
+    (14, 7),
+    (13, 8),
+    (12, 9),
+    (11, 10),
+    (10, 11),
+    (9, 12),
+    (8, 13),
+    (7, 14);
+
+INSERT INTO Book_Shopping(ID_Book,ID_Shopping) VALUES
+    (1, 1);
+
+INSERT INTO Book_Shopping(ID_Book,ID_Shopping) VALUES
+    (1, 8);
+
+INSERT INTO Book_Shopping(ID_Book,ID_Shopping) VALUES
+    (1, 1);
+
+DROP TABLE Book_Shopping;
+-- *****************************************************7- LIBROS EN EL CARRITO*****************************
+
+-- *****************************************************8- VISTAS*******************************************
+CREATE TABLE
+    Review (
+        ID_Review INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ID_Book INTEGER NOT NULL,
+        ID_User INTEGER NOT NULL,
+        Comment_date DATE DEFAULT CURRENT_DATE,
+        Score INTEGER NOT NULL,
+        Comment VARCHAR,
+        FOREIGN KEY (ID_Book) REFERENCES Book (ID_Book),
+        FOREIGN KEY (ID_User) REFERENCES User (ID_User)
+    );
+INSERT INTO Review (ID_Book, ID_User,Score,Comment) VALUES
+    (1,7, 9, 'Muy bueno'),
+    (5,1, 1, 'Muy malo'),
+    (15,4, 2, 'Muy caro'),
+    (8,9, 10, 'Muy buena la trama');
+
+DROP TABLE REVIEW;
+-- *****************************************************8- VISTAS*******************************************
+
+-- *****************************************************9- AUTOR********************************************
+CREATE TABLE
+    Author (
+        ID_Author INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        Name VARCHAR(30)
+    );
+
+INSERT INTO Author (Name) VALUES
+    ('Robert Kiyosaki'),
+    ('James Halliwell-Phillipp'),
+    ('Elena Ferrandiz'),
+    ('VV.AA.'),
+    ('Roberto Santiago'),
+    ('Marian Rojas Estapé'),
+    ('Ángela Banzas'),
+    ('Kyoko Imamura'),
+    ('Javier Castillo'),
+    ('Eloy Moreno'),
+    ('Pablo Rivero'),
+    ('Pablo Rivero'),
+    ('Pablo Rivero'),
+    ('Enrique Cebrián Zazurca'),
+    ('Oswaldo Reynoso'),
+    ('Cristina Gutierrez'),
+    ('Massimo Pigliucci'),
+    ('Martí Perarnau'),
+    ('Erik Harley'),
+    ('Thibaut Courtois');
+
+DROP TABLE Author;
+-- *****************************************************9- AUTOR********************************************
+
+-- *****************************************************10- LIBROS DEL AUTOR********************************
+CREATE TABLE
+    Author_Book (
+        ID_Author_Book INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ID_Author INTEGER NOT NULL,
+        ID_Book INTEGER NOT NULL,
+        FOREIGN KEY (ID_Author) REFERENCES Author (ID_Author),
+        FOREIGN KEY (ID_Book) REFERENCES Book (ID_Book)
+    );
+INSERT INTO Author_Book(ID_Author,ID_Book) VALUES
+    (1, 1);
+
+INSERT INTO Author_Book(ID_Author, ID_Book) VALUES
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+    (6, 6),
+    (7, 7),
+    (8, 8),
+    (9, 9),
+    (10, 10),
+    (11, 11),
+    (12, 12),
+    (13, 13),
+    (14, 14),
+    (15, 15),
+    (16, 16),
+    (17, 17),
+    (18, 18),
+    (19, 19),
+    (20, 20);
+
+
+DROP TABLE Author_Book;
+-- *****************************************************10- LIBROS DEL AUTOR********************************
+
+-- *****************************************************11- GENERO******************************************
+CREATE TABLE
+    Genre (
+        ID_Genre INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        Description VARCHAR,
+        State VARCHAR
+    );
+
+INSERT INTO Genre (Description,State) VALUES
+    ('Economía', 'Active'),
+    ('Deportes', 'Active'),
+    ('Hentai', 'Inactive'),
+    ('Filosofía', 'Active'),
+    ('Novela negra', 'Inactive'),
+    ('Novela', 'Active'),
+    ('Infantil', 'Inactive'),
+    ('Novela romántica y erótica', 'Active'),
+    ('Autoayuda', 'Active'),
+    ('Juvenil', 'Inactive'),
+    ('Drama', 'Active');
+
+INSERT INTO Genre (Description,State) VALUES
+    ('Derecho Penal', 'Active');
+
+INSERT INTO Genre (Description,State) VALUES
+    ('Psicologia', 'Active');
+
+DROP TABLE Genre;
+-- *****************************************************11- GENERO******************************************
+
+-- *****************************************************12- GENERO DEL LIBRO********************************
+CREATE TABLE 
+    Genre_Book ( 
+    ID_Genre_Book INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    ID_Genre INTEGER NOT NULL,
+    ID_Book INTEGER NOT NULL,
+    FOREIGN KEY (ID_Genre) REFERENCES Genre (ID_Genre),
+    FOREIGN KEY (ID_Book) REFERENCES Book (ID_Book)
+    );
+
+INSERT INTO Genre_Book(ID_Genre,ID_Book) VALUES
+    (1, 1),
+    (7, 2),
+    (8, 3),
+    (12, 4),
+    (5, 5),
+    (9, 6),
+    (5, 7),
+    (2, 8),
+    (5, 9),
+    (10, 10),
+    (3, 11),
+    (3, 12),
+    (3, 13),
+    (6, 14),
+    (5, 15),
+    (13, 16),
+    (4, 17),
+    (2, 18),
+    (2, 19),
+    (2, 20);
+
+
+
+DROP TABLE Genre_Book;
+-- *****************************************************12- GENERO DEL LIBRO********************************
+
+-- *****************************************************13- INVENTARIO**************************************
+CREATE TABLE
+    Inventory (
+        ID_Inventory INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ID_Book INTEGER NOT NULL,
+        Copies INTEGER NOT NULL,
+        Borrowed_Books INTEGER NOT NULL,
+        Available_Books INTEGER NOT NULL,
+        FOREIGN KEY (ID_Book) REFERENCES Book (ID_Book)
+    );
+
+INSERT INTO Inventory(ID_Book,Copies,Borrowed_Books,Available_Books) VALUES--Borrowed_Books LIBROS PRESTADOS Available_Books LIBROS DISPONILES
+    (1,132,30,102),
+    (2,292,150,192),
+    (3,97,90,7),
+    (4,67,7,60),
+    (5,7,0,0),
+    (6,4,1,3),
+    (7,21,17,4),
+    (8,43,13,30),
+    (9,77,71,6),
+    (10,9,4,5),
+    (11,44,40,4),
+    (12,1,0,1),
+    (13,75,5,70),
+    (14,65,20,45),
+    (15,9,5,4),
+    (16,0,0,0),
+    (17,14,3,11),
+    (18,100,50,50),
+    (19,13,3,10),
+    (20,2,1,1);
+
+DROP TABLE Inventory;
+-- *****************************************************13- INVENTARIO***************************************
+
+-- *****************************************************14- DEVOLVER LIBROS**********************************
+CREATE TABLE
+    Returned_Book (
+        ID_Return_Book INTEGER NOT NULL,
+        ID_Book INTEGER NOT NULL,
+        ID_Shopping INTEGER NOT NULL,
+        Return_Date DATE,
+        State VARCHAR(50)
+    );
+
+INSERT INTO Returned_Book (ID_Book, ID_Shopping, Return_Date, State) VALUES
+    (1, 2, 2023, 'Active'),
+    (9, 15, 2023, 'Active'),
+    (19, 3, 2023, 'Active'),
+    (7, 12, 2023, 'Active'),
+    (11, 20, 2023, 'Active');
+-- *****************************************************14- DEVOLVER LIBROS**********************************
+
+-- *****************************************************15- TRIGGERS #1*****************************************
+CREATE TRIGGER Update_Inventory_borrowed_books AFTER INSERT ON Book_Shopping FOR EACH ROW BEGIN
+-- Actualizar la cantidad disponible y aumentar la cantidad ya alquilada
+UPDATE Inventory
+SET
+    Available_Books = CASE
+        WHEN (
+            SELECT
+                Available_Books
+            FROM
+                Inventory
+            WHERE
+                ID_Book = NEW.ID_Book
+        ) > 0 THEN Available_Books - 1
+        ELSE Available_Books
+    END,
+    Borrowed_Books = CASE
+        WHEN (
+            SELECT
+                Available_Books
+            FROM
+                Inventory
+            WHERE
+                ID_Book = NEW.ID_Book
+        ) > 0 THEN Borrowed_Books + 1
+        ELSE Borrowed_Books
+    END
+WHERE
+    ID_Book = NEW.ID_Book;
+END;
+
+DROP TABLE Update_Inventory;
+
+DROP TRIGGER Update_Inventory;
+-- *****************************************************15- TRIGGERS #2***************************************
+-- Crear el trigger
+CREATE TRIGGER update_inventory_available_books
+    AFTER INSERT ON Returned_books
+    FOR EACH ROW
+    BEGIN
+    -- Actualizar Inventory para cada libro en la orden
+    INSERT INTO Inventory (ID_Book, Available_Books, Borrowed_Books)
+    SELECT b.ID_Book, 
+            CASE WHEN Available_Books > 0 THEN Available_Books - 1 ELSE 0 END,
+            Available_Books + 1
+    FROM Book AS b
+    INNER JOIN Book_Shopping AS bs ON b.ID_Book = bs.ID_Book
+    INNER JOIN Inventory AS io ON bs.ID_Book = io.ID_Book
+    WHERE bs.ID_Shopping = NEW.ID_Shopping;
+END;
+
+DROP TRIGGER Update_Inventory;
+
+DROP TRIGGER update_inventory_on_shopping_update;
+
+--***********************************************
+CREATE VIEW RecentLoans AS
+    SELECT
+    Shopping.ID_Shopping,
+        Shopping.ID_User,
+        Shopping.ID_Rental_Time,
+        Shopping.Payment_Amount,
+        Shopping.Loan_Date,
+        Shopping.Return_Date,
+        Shopping.Late_Amount,
+        Shopping.Transaction_Number,
+        Shopping.Total_Amount,
+        Shopping.State,
+        User.Name AS UserName,
+        Rental_Time.Description AS RentalTimeDescription
+        FROM Shopping
+        INNER JOIN User ON Shopping.ID_User = User.ID_User
+        INNER JOIN Rental_Time ON Shopping.ID_Rental_Time = Rental_Time.ID_Rental_Time
+        WHERE Shopping.Loan_Date >= CURRENT_DATE
+        ORDER BY Shopping.Loan_Date DESC
+        LIMIT 10;
+
+SELECT * FROM RecentLoans;
+
+DROP VIEW RecentLoans;
+
+-----------------------------------------------------------CONSULTAS----------------------------------------------------------------------
+--1 Consulta que permita tener los libros mejor calificados (mayor a 3 estrellas)
+
+Select b.Name as "Book", r.Score as "Score"
+    from BOOK b inner join Review r on b.ID_Book = r.ID_Book
+    where r.Score > 3;
+
+-- 2 Consulta para saber cuantos libros del mismo género existen en la base de datos
+
+SELECT genre, COUNT(*) AS book_count
+FROM Book
+GROUP BY genre
+ORDER BY book_count DESC;
+
+
+--3 Consulta para obtener libros por nombre
+--  3-1   Una donde podamos buscar por nombres que inicien con un texto específico
+--  3-2   Otra donde podamos buscar por libros cuyo nombre finalice con un texto específico
+SELECT * FROM
+    Book
+WHERE Name LIKE 'A%';
+
+SELECT * FROM
+    Book
+WHERE Name LIKE '%A';
+
+--4 Consulta para saber los libros alquilados por un usuario (por email) el mes anterior.
+SELECT b.Name AS "BOOK"
+    FROM Book b INNER JOIN Book_Shopping bs ON b.ID_Book = bs.ID_Book
+    INNER JOIN Shopping s ON bs.ID_Shopping = s.ID_Shopping
+    INNER JOIN User u ON u.ID_User = s.ID_User
+    WHERE u.EMAIL = 'saradiaz23@gmail.com' AND 
+    strftime('%Y-%m', s.Loan_Date) = strftime('%Y-%m', 'now', '-1 month')
+    ;
+
+--5 Consulta que nos permita saber el promedio de libros alquilados por día.
+
+SELECT AVG(ID_BOOK_SHOPPING)
+    FROM BOOK b INNER JOIN BOOK_SHOPPING bsc on ISBN = ISBN
+    inner join SHOPPING sc on bsc.ID_SHOPPING = sc.ID_SHOPPING
+    WHERE sc.LOAN_DATE = '2023-09-28'
+    group by sc.LOAN_DATE
+    ORDER BY sc.LOAN_DATE ASC;
+
+SELECT * FROM Shopping;
+
+--6 Consulta para saber cuál fue el libro más alquilado en el mes anterior
+
+SELECT Book.Name
+    FROM Shopping
+    JOIN Book ON Shopping.ID_Shopping = Book.ID_Book
+    GROUP BY Book.Name
+    ORDER BY COUNT(*) DESC
+    ;
+
+--7 Consulta que nos permita saber cuáles libros no se encuentran en el inventario pero si en la tabla de libros
+
+SELECT Book.ID_Book, Book.Name
+    FROM Book
+    LEFT JOIN Inventory ON Book.ID_Book = Inventory.ID_Inventory
+    WHERE Inventory.ID_Inventory IS NULL;
+-----------------------------------------------------------CONSULTAS----------------------------------------------------------------------
+
+-- ~~~~~~~~~~~~~~~~Actualizar el estado de las órdenes o registro de libros alquilados~~~~~~~~~~~~~~~~
+
+UPDATE Shopping
+    SET state = 1
+    WHERE EXISTS(SELECT 1 FROM User
+    JOIN Shopping ON Shopping.state = User.id_User_type
+    JOIN User_Type  ON User_Type.id_User_type  = User.id_User_type
+    WHERE User.id_user = 3 AND User_Type.id_User_type = 2 ) AND state = 3;
+
+
+UPDATE Shopping
+    SET state = 1
+    WHERE EXISTS(SELECT 1 FROM User
+    JOIN Shopping  ON Shopping.state = User.id_User_type 
+    JOIN User_Type  ON User_Type.id_User_type  = User.id_User_type 
+    WHERE User.id_user = 3 AND User_Type.id_User_type = 2 ) AND ID_Shopping = 3;
+
+-- ~~~~~~~~~~~~~~~~Habilitar o deshabilitar reseñas/comentarios (reviews/feedback) realizados a libros~~~~~~~~~~~~~~~~
+
+DELETE FROM Review
+    WHERE EXISTS(SELECT 1 FROM User
+    JOIN Review  ON Review.id_review  = User.id_User_type
+    JOIN User_Type  ON User_Type.id_User_type  = User.id_User_type 
+    WHERE User.id_user = 3 AND User_Type.id_User_type  = 2 ) AND comment >= 'Bueno';
